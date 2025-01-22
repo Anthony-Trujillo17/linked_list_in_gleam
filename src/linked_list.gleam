@@ -42,7 +42,7 @@ pub fn is_empty(ls: Ls(a)) -> Bool {
 pub fn append(ls: Ls(a), x: a) -> Ls(a) {
   case ls {
     El -> wrap(x)
-    Ls(value, next) -> Ls(value, append(next, x))
+    Ls(h, t) -> Ls(h, append(t, x))
   }
 }
 
@@ -57,7 +57,7 @@ pub fn prepend(ls: Ls(a), x: a) -> Ls(a) {
 pub fn pop(ls: Ls(a)) -> Ls(a) {
   case ls {
     El -> El
-    Ls(_, next) -> next
+    Ls(_, t) -> t
   }
 }
 
@@ -71,13 +71,13 @@ pub fn pop_n(ls: Ls(a), n: Int) -> Ls(a) {
 /// fully reverses a Ls
 ///
 pub fn reverse(ls: Ls(a)) -> Ls(a) {
-  tail_reverse(ls, El)
+  tr_reverse(ls, El)
 }
 
-fn tail_reverse(ls: Ls(a), res: Ls(a)) -> Ls(a) {
+fn tr_reverse(ls: Ls(a), res: Ls(a)) -> Ls(a) {
   case ls {
     El -> res
-    Ls(value, next) -> tail_reverse(next, Ls(value, res))
+    Ls(h, t) -> tr_reverse(t, Ls(h, res))
   }
 }
 
@@ -85,13 +85,13 @@ fn tail_reverse(ls: Ls(a), res: Ls(a)) -> Ls(a) {
 /// transforming the Ls(a) into an Ls(b)
 ///
 pub fn map(ls: Ls(a), f: fn(a) -> b) -> Ls(b) {
-  tail_map(ls, El, f) |> reverse
+  tr_map(ls, El, f) |> reverse
 }
 
-fn tail_map(ls: Ls(a), res: Ls(b), f: fn(a) -> b) -> Ls(b) {
+fn tr_map(ls: Ls(a), res: Ls(b), f: fn(a) -> b) -> Ls(b) {
   case ls {
     El -> res
-    Ls(value, next) -> tail_map(next, Ls(f(value), res), f)
+    Ls(h, t) -> tr_map(t, prepend(res, f(h)), f)
   }
 }
 
