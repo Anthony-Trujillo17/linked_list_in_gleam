@@ -65,7 +65,11 @@ pub fn pop(ls: Ls(a)) -> Ls(a) {
 /// if n < 0, it should remove the N last elements of the list
 ///
 pub fn pop_n(ls: Ls(a), n: Int) -> Ls(a) {
-  todo
+  case n {
+    0 -> ls
+    n if n > 0 -> pop_n(pop(ls), n - 1)
+    _ -> reverse(pop_n(reverse(ls), -n))
+  }
 }
 
 /// fully reverses a Ls
