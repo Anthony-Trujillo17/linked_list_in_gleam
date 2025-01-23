@@ -16,6 +16,16 @@ const single_element_list = Ls(1, El)
 
 const multi_elements_list = Ls(1, Ls(2, Ls(3, El)))
 
+pub fn new_test() {
+  linked_list.new()
+  |> should.equal(El)
+}
+
+pub fn wrap_test() {
+  linked_list.wrap(4)
+  |> should.equal(Ls(4, El))
+}
+
 pub fn append_test() {
   single_element_list
   |> linked_list.append(2)
