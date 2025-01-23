@@ -1,3 +1,4 @@
+import gleam/option
 import gleeunit
 import gleeunit/should
 import linked_list.{El, Ls}
@@ -70,4 +71,20 @@ pub fn map_test() {
   multi_elements_list
   |> linked_list.map(fn(x) { x * 10 })
   |> should.equal(Ls(10, Ls(20, Ls(30, El))))
+}
+
+pub fn get_test() {
+  multi_elements_list
+  |> linked_list.get(2)
+  |> should.equal(option.Some(3))
+
+  multi_elements_list
+  |> linked_list.get(5)
+  |> should.equal(option.None)
+}
+
+pub fn concat_test() {
+  multi_elements_list
+  |> linked_list.concat(single_element_list)
+  |> should.equal(Ls(1, Ls(2, Ls(3, Ls(1, El)))))
 }

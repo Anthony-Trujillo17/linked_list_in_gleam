@@ -1,5 +1,6 @@
 import gleam/bool
 import gleam/io
+import gleam/option.{type Option}
 
 pub fn main() {
   io.println("Hello from linked_list!")
@@ -104,7 +105,17 @@ fn tr_map(ls: Ls(a), res: Ls(b), f: fn(a) -> b) -> Ls(b) {
 /// the 'each' function returns Nil eventually
 ///
 pub fn each(ls: Ls(a), f: fn(a) -> b) -> Nil {
-  todo
+  tr_each(ls, f)
+}
+
+fn tr_each(ls: Ls(a), f: fn(a) -> b) -> Nil {
+  case ls {
+    El -> Nil
+    Ls(h, t) -> {
+      f(h)
+      tr_each(t, f)
+    }
+  }
 }
 
 /// BONI: when live checking the previous functions
@@ -113,10 +124,26 @@ pub fn each(ls: Ls(a), f: fn(a) -> b) -> Nil {
 /// returns the nth element of an Ls(a)
 /// you should decide of the best return type for this function
 ///
-// pub fn get(ls: Ls(a), index n: Int) -> ???{}
+pub fn get(ls: Ls(a), n: Int) -> Option(a) {
+  tr_get(ls, n, 0)
+}
+
+fn tr_get(ls: Ls(a), target: Int, current: Int) -> Option(a) {
+  case ls {
+    El -> option.None
+    Ls(h, t) ->
+      case current == target {
+        True -> option.Some(h)
+        False -> tr_get(t, target, current + 1)
+      }
+  }
+}
 
 /// returns concatenated lists l1 ++ l2
 ///
 pub fn concat(l1: Ls(a), l2: Ls(a)) -> Ls(a) {
-  todo
+  case l1 {
+    El -> l2
+    Ls(h, t) -> Ls(h, concat(t, l2))
+  }
 }
