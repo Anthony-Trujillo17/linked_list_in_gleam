@@ -1,3 +1,6 @@
+# Single Linked List (SLL) Implementation in Gleam
+This repository contains an implementation of a Singly Linked List (SLL) in Gleam. The SLL is built using an Algebraic Data Type (ADT), enabling an efficient, flexible, and functional way to work with linked lists.
+
 # linked_list
 
 [![Package Version](https://img.shields.io/hexpm/v/linked_list)](https://hex.pm/packages/linked_list)
@@ -22,12 +25,6 @@ Further documentation can be found at <https://hexdocs.pm/linked_list>.
 gleam run   # Run the project
 gleam test  # Run the tests
 ```
-
-
-# Single Linked List (SLL) Implementation in Gleam
-This repository contains the implementation of a Single Linked List (SLL) in Gleam.
-The SLL is implemented using an Algebraic Data Type (ADT), which allows for an efficient, flexible, 
-and functional approach to working with linked lists.
 
 # Operations
 
